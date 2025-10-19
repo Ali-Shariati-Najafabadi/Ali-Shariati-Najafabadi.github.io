@@ -13,7 +13,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-black flex flex-col">
       {/* Hero Section */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/30 to-fuchsia-500/30"></div>
@@ -94,7 +94,7 @@ export default function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-12">
+      <main className="container mx-auto px-6 py-12 flex-1">
         <div className="max-w-6xl mx-auto">
           {/* About Section */}
           {activeSection === 'about' && (
