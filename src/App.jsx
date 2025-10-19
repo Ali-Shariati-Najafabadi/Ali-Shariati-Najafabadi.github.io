@@ -48,9 +48,9 @@ export default function App() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
               <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-slate-800 bg-gradient-to-br from-slate-800 to-slate-900">
-                {/* HIER KOMMT DEIN FOTO */}
+                {}
                 <img 
-                  src="/photo.jpg" 
+                  src="https://imgur.com/a/KEGBs3J" 
                   alt="Ali Shariati Najafabadi" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -232,14 +232,6 @@ export default function App() {
                       <p className="flex gap-3 hover:text-white transition-colors">
                         <span className="text-purple-400">▸</span>
                         <span>Bachelorarbeit beim Fraunhofer SIT: "Detection von multimodalen Deepfakes"</span>
-                      </p>
-                      <p className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-purple-400">▸</span>
-                        <span>Geplanter Beginn des Masterstudiums: Wintersemester 2026</span>
-                      </p>
-                      <p className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-purple-400">▸</span>
-                        <span>Erreichte Credits: 110 CP</span>
                       </p>
                     </div>
                   </div>
