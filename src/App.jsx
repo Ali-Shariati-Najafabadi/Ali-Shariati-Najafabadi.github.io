@@ -50,7 +50,7 @@ export default function App() {
               <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-slate-800 bg-gradient-to-br from-slate-800 to-slate-900">
                 {}
                 <img 
-                  src="https://imgur.com/a/KEGBs3J" 
+                  src="https://i.imgur.com/F0IviBD.jpeg" 
                   alt="Ali Shariati Najafabadi" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
