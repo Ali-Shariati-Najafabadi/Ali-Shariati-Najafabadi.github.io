@@ -1,16 +1,168 @@
 import React, { useState } from 'react';
-import { Github, Mail, Phone, MapPin, Calendar, Code, Brain, Award, ExternalLink, Download } from 'lucide-react';
+import { Github, Mail, Phone, MapPin, Calendar, Code, Brain, Award, ExternalLink, Download, Globe } from 'lucide-react';
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState('about');
+  const [activeSection, setActiveSection] = useState('experience');
+  const [language, setLanguage] = useState('de');
 
-  const sections = {
-    about: 'Über mich',
-    experience: 'Berufserfahrung',
-    education: 'Ausbildung',
-    projects: 'Projekte',
-    skills: 'Kompetenzen'
+  const translations = {
+    de: {
+      sections: {
+        about: 'Über mich',
+        experience: 'Berufserfahrung',
+        education: 'Ausbildung',
+        projects: 'Projekte',
+        skills: 'Kompetenzen'
+      },
+      hero: {
+        title: 'Ali Shariati Najafabadi',
+        subtitle: 'Informatikstudent an der TU Darmstadt mit Erfahrung in Softwareentwicklung, Machine Learning und Testautomatisierung.',
+        tagline: 'Teamfähig • Analytisch • Praxisorientiert',
+        contact: 'Kontakt',
+        cv: 'Lebenslauf'
+      },
+      about: {
+        title: 'Über mich',
+        email: 'E-Mail',
+        phone: 'Telefon',
+        location: 'Standort',
+        locationValue: 'Darmstadt, Deutschland',
+        languages: 'Sprachkenntnisse',
+        german: 'Deutsch',
+        english: 'Englisch',
+        persian: 'Persisch',
+        advanced: 'Fortgeschritten',
+        native: 'Muttersprache'
+      },
+      experience: {
+        title: 'Berufserfahrung',
+        position: 'Werkstudent Softwareentwicklung & Testautomatisierung',
+        company: 'Fraport AG, Frankfurt am Main',
+        period: 'Aug 2023 - Aktuell',
+        tasks: [
+          'Entwicklung und Qualitätssicherung des mobilen Informationssystems zur Flugzeugabfertigung',
+          'Implementierung von 60+ End-to-End-Tests mit TestComplete und JavaScript (Gherkin), Reduktion manueller Testzeit um 60%',
+          'Entwicklung von 70+ automatisierten API-Tests mit ReadyAPI, Integration in CI/CD-Pipeline zur Validierung von Kafka-Nachrichten',
+          'Dokumentation und Analyse von Fehlern in JIRA, Verwaltung von Aufgaben in Azure DevOps',
+          'Optimierung der CI/CD-Pipeline im agilen Team, regelmäßige Teilnahme an Sprint-Reviews'
+        ]
+      },
+      education: {
+        title: 'Ausbildung',
+        degree: 'B.Sc. Informatik',
+        university: 'Technische Universität Darmstadt',
+        period: 'Okt 2021 - Aktuell',
+        thesis: 'Bachelor-Thesis (Abschluss: März 2026): "Detection of Multimodal Deepfakes" beim Fraunhofer SIT',
+        master: 'Geplant: Master Informatik, TU Darmstadt (ab April 2026)'
+      },
+      projects: {
+        title: 'Projekte',
+        project1: {
+          title: 'Real-Time Deepfake Pipeline',
+          org: 'System Security Lab, TU Darmstadt',
+          desc: 'Entwicklung einer performanten Echtzeit-Pipeline zur Stimm- und Gesichtsumwandlung mit Client-Server-Architektur und benutzerfreundlicher GUI. Technologien: Diff-HierVC, InsightFace, GFPGAN'
+        },
+        project2: {
+          title: 'Tool Support for Sustainable Protocol Security',
+          org: 'SEEMOO, TU Darmstadt',
+          desc: 'Full-Stack-Webanwendung zur Analyse von LoRaWAN-Sicherheitslücken aus 100+ Papers mit interaktiver Visualisierung und Graph-Ansichten. Python CLI-Tools zur automatisierten Generierung von LaTeX-Tabellen.'
+        },
+        project3: {
+          title: 'Context-Aware Captions from Photos',
+          org: 'System Security Lab, TU Darmstadt',
+          desc: 'Training eines BLIP-2-Modells auf GoodNews-Datensatz (15k Bilder) zur kontextbewussten Bildbeschreibung - erreichte 23% Verbesserung gegenüber Baseline bei BLEU-Score'
+        }
+      },
+      skills: {
+        title: 'Technische Kompetenzen',
+        languages: 'Programmiersprachen',
+        frameworks: 'Frameworks & Tools',
+        ml: 'Machine Learning & AI'
+      },
+      footer: {
+        rights: '© 2025 Ali Shariati Najafabadi. Alle Rechte vorbehalten.'
+      }
+    },
+    en: {
+      sections: {
+        about: 'About Me',
+        experience: 'Experience',
+        education: 'Education',
+        projects: 'Projects',
+        skills: 'Skills'
+      },
+      hero: {
+        title: 'Ali Shariati Najafabadi',
+        subtitle: 'Computer Science student at TU Darmstadt with experience in software development, machine learning, and test automation.',
+        tagline: 'Team Player • Analytical • Practical',
+        contact: 'Contact',
+        cv: 'Resume'
+      },
+      about: {
+        title: 'About Me',
+        email: 'Email',
+        phone: 'Phone',
+        location: 'Location',
+        locationValue: 'Darmstadt, Germany',
+        languages: 'Languages',
+        german: 'German',
+        english: 'English',
+        persian: 'Persian',
+        advanced: 'Advanced',
+        native: 'Native'
+      },
+      experience: {
+        title: 'Work Experience',
+        position: 'Working Student Software Development & Test Automation',
+        company: 'Fraport AG, Frankfurt am Main',
+        period: 'Aug 2023 - Present',
+        tasks: [
+          'Development and quality assurance of mobile information system for aircraft handling',
+          'Implementation of 60+ end-to-end tests with TestComplete and JavaScript (Gherkin), reducing manual testing time by 60%',
+          'Development of 70+ automated API tests with ReadyAPI, integration into CI/CD pipeline for Kafka message validation',
+          'Documentation and analysis of errors in JIRA, task management in Azure DevOps',
+          'Optimization of CI/CD pipeline in agile team, regular participation in sprint reviews'
+        ]
+      },
+      education: {
+        title: 'Education',
+        degree: 'B.Sc. Computer Science',
+        university: 'Technical University of Darmstadt',
+        period: 'Oct 2021 - Present',
+        thesis: 'Bachelor Thesis (Completion: March 2026): "Detection of Multimodal Deepfakes" at Fraunhofer SIT',
+        master: 'Planned: Master Computer Science, TU Darmstadt (from April 2026)'
+      },
+      projects: {
+        title: 'Projects',
+        project1: {
+          title: 'Real-Time Deepfake Pipeline',
+          org: 'System Security Lab, TU Darmstadt',
+          desc: 'Development of a performant real-time pipeline for voice and face conversion with client-server architecture and user-friendly GUI. Technologies: Diff-HierVC, InsightFace, GFPGAN'
+        },
+        project2: {
+          title: 'Tool Support for Sustainable Protocol Security',
+          org: 'SEEMOO, TU Darmstadt',
+          desc: 'Full-stack web application for analyzing LoRaWAN security vulnerabilities from 100+ papers with interactive visualization and graph views. Python CLI tools for automated generation of LaTeX tables.'
+        },
+        project3: {
+          title: 'Context-Aware Captions from Photos',
+          org: 'System Security Lab, TU Darmstadt',
+          desc: 'Training of a BLIP-2 model on GoodNews dataset (15k images) for context-aware image captioning - achieved 23% improvement over baseline in BLEU score'
+        }
+      },
+      skills: {
+        title: 'Technical Skills',
+        languages: 'Programming Languages',
+        frameworks: 'Frameworks & Tools',
+        ml: 'Machine Learning & AI'
+      },
+      footer: {
+        rights: '© 2025 Ali Shariati Najafabadi. All rights reserved.'
+      }
+    }
   };
+
+  const t = translations[language];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-black flex flex-col">
@@ -24,20 +176,31 @@ export default function App() {
             <h1 className="text-2xl font-bold text-white bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Ali Shariati
             </h1>
-            <div className="hidden md:flex gap-6">
-              {Object.entries(sections).map(([key, label]) => (
-                <button
-                  key={key}
-                  onClick={() => setActiveSection(key)}
-                  className={`text-sm font-medium transition-all duration-300 ${
-                    activeSection === key
-                      ? 'text-blue-400 border-b-2 border-blue-400'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
+            <div className="flex items-center gap-6">
+              {/* Sprach-Umschalter */}
+              <button
+                onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+                className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700/50 hover:border-cyan-500/50"
+              >
+                <Globe size={16} />
+                {language === 'de' ? 'EN' : 'DE'}
+              </button>
+              
+              <div className="hidden md:flex gap-6">
+                {Object.entries(t.sections).map(([key, label]) => (
+                  <button
+                    key={key}
+                    onClick={() => setActiveSection(key)}
+                    className={`text-sm font-medium transition-all duration-300 ${
+                      activeSection === key
+                        ? 'text-blue-400 border-b-2 border-blue-400'
+                        : 'text-gray-300 hover:text-white'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </nav>
@@ -48,13 +211,11 @@ export default function App() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-fuchsia-500 rounded-full blur-lg opacity-90 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
               <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-slate-800 bg-gradient-to-br from-slate-800 to-slate-900">
-                {}
                 <img 
                   src="https://i.imgur.com/F0IviBD.jpeg" 
                   alt="Ali Shariati Najafabadi" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    // Fallback wenn kein Foto vorhanden
                     e.target.style.display = 'none';
                     e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-6xl font-bold text-white bg-gradient-to-br from-blue-600 to-purple-600">AS</div>';
                   }}
@@ -65,19 +226,18 @@ export default function App() {
             {/* Text Bereich */}
             <div className="flex-1 text-center md:text-left">
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-fade-in">
-                Ali Shariati Najafabadi
+                {t.hero.title}
               </h2>
               <p className="text-xl md:text-2xl text-blue-200 mb-6 leading-relaxed">
-                Informatikstudent an der TU Darmstadt mit Erfahrung in Softwareentwicklung, 
-                Machine Learning und Testautomatisierung.
+                {t.hero.subtitle}
               </p>
               <p className="text-lg text-gray-300 mb-8">
-                Teamfähig • Analytisch • Praxisorientiert
+                {t.hero.tagline}
               </p>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-cyan-500/50">
                   <Mail size={20} />
-                  Kontakt
+                  {t.hero.contact}
                 </a>
                 <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-black border-2 border-cyan-500/50 hover:border-cyan-400 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg">
                   <Github size={20} />
@@ -85,7 +245,7 @@ export default function App() {
                 </a>
                 <a href="/lebenslauf.pdf" download className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-500 to-purple-500 hover:from-fuchsia-600 hover:to-purple-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-fuchsia-500/50">
                   <Download size={20} />
-                  CV
+                  {t.hero.cv}
                 </a>
               </div>
             </div>
@@ -100,14 +260,14 @@ export default function App() {
           {activeSection === 'about' && (
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
               <h3 className="text-3xl font-bold text-white mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Über mich
+                {t.about.title}
               </h3>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-4">
                   <div className="flex items-start gap-3 text-gray-300 p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors">
                     <Mail className="mt-1 text-blue-400" size={20} />
                     <div>
-                      <p className="font-semibold text-white">E-Mail</p>
+                      <p className="font-semibold text-white">{t.about.email}</p>
                       <a href="mailto:alishariaty0854@gmail.com" className="hover:text-blue-400 transition-colors">
                         alishariaty0854@gmail.com
                       </a>
@@ -116,27 +276,27 @@ export default function App() {
                   <div className="flex items-start gap-3 text-gray-300 p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors">
                     <Phone className="mt-1 text-blue-400" size={20} />
                     <div>
-                      <p className="font-semibold text-white">Telefon</p>
+                      <p className="font-semibold text-white">{t.about.phone}</p>
                       <a href="tel:+4915754703516" className="hover:text-blue-400 transition-colors">
-                        015754703516
+                        +49 157 54703516
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 text-gray-300 p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors">
                     <MapPin className="mt-1 text-blue-400" size={20} />
                     <div>
-                      <p className="font-semibold text-white">Standort</p>
-                      <p>Darmstadt, Deutschland</p>
+                      <p className="font-semibold text-white">{t.about.location}</p>
+                      <p>{t.about.locationValue}</p>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <h4 className="text-xl font-semibold text-white mb-4">Sprachkenntnisse</h4>
+                  <h4 className="text-xl font-semibold text-white mb-4">{t.about.languages}</h4>
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between text-gray-300 mb-2">
-                        <span className="font-medium">Deutsch</span>
-                        <span className="text-blue-400">Fortgeschritten</span>
+                        <span className="font-medium">{t.about.german}</span>
+                        <span className="text-blue-400">{t.about.advanced}</span>
                       </div>
                       <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 w-4/5 rounded-full transition-all duration-1000"></div>
@@ -144,8 +304,8 @@ export default function App() {
                     </div>
                     <div>
                       <div className="flex justify-between text-gray-300 mb-2">
-                        <span className="font-medium">Englisch</span>
-                        <span className="text-blue-400">Fortgeschritten</span>
+                        <span className="font-medium">{t.about.english}</span>
+                        <span className="text-blue-400">{t.about.advanced}</span>
                       </div>
                       <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 w-4/5 rounded-full transition-all duration-1000"></div>
@@ -153,8 +313,8 @@ export default function App() {
                     </div>
                     <div>
                       <div className="flex justify-between text-gray-300 mb-2">
-                        <span className="font-medium">Persisch</span>
-                        <span className="text-purple-400">Muttersprache</span>
+                        <span className="font-medium">{t.about.persian}</span>
+                        <span className="text-purple-400">{t.about.native}</span>
                       </div>
                       <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-purple-500 to-purple-600 w-full rounded-full transition-all duration-1000"></div>
@@ -170,7 +330,7 @@ export default function App() {
           {activeSection === 'experience' && (
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
               <h3 className="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Berufserfahrung
+                {t.experience.title}
               </h3>
               <div className="relative border-l-2 border-blue-500 pl-8 ml-4">
                 <div className="mb-8">
@@ -178,32 +338,18 @@ export default function App() {
                   <div className="bg-slate-700/50 rounded-lg p-6 hover:bg-slate-700/70 transition-all duration-300 border border-slate-600/50 hover:border-blue-500/50">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
                       <div>
-                        <h4 className="text-xl font-bold text-white mb-1">Werkstudent Softwareentwicklung & Testautomatisierung</h4>
-                        <p className="text-blue-400 font-semibold">Fraport AG, Frankfurt am Main</p>
+                        <h4 className="text-xl font-bold text-white mb-1">{t.experience.position}</h4>
+                        <p className="text-blue-400 font-semibold">{t.experience.company}</p>
                       </div>
-                      <span className="text-gray-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full">Aug 2023 - Aktuell</span>
+                      <span className="text-gray-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full">{t.experience.period}</span>
                     </div>
                     <ul className="space-y-3 text-gray-300">
-                      <li className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-blue-400 mt-1">▸</span>
-                        <span>Unterstützung bei der Entwicklung und Qualitätssicherung des mobilen Informationssystems zur Flugzeugabfertigung</span>
-                      </li>
-                      <li className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-blue-400 mt-1">▸</span>
-                        <span>Entwicklung automatisierter End-to-End-Tests mit TestComplete und JavaScript (Gherkin)</span>
-                      </li>
-                      <li className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-blue-400 mt-1">▸</span>
-                        <span>Erstellung von API-Tests mit ReadyAPI und Validierung von Kafka-Nachrichten zur Backend-Integration</span>
-                      </li>
-                      <li className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-blue-400 mt-1">▸</span>
-                        <span>Dokumentation und Analyse von Fehlern in JIRA, Verwaltung von Aufgaben in Azure DevOps</span>
-                      </li>
-                      <li className="flex gap-3 hover:text-white transition-colors">
-                        <span className="text-blue-400 mt-1">▸</span>
-                        <span>Mitarbeit an der Verbesserung von CI/CD-Prozessen und der Testumgebung</span>
-                      </li>
+                      {t.experience.tasks.map((task, index) => (
+                        <li key={index} className="flex gap-3 hover:text-white transition-colors">
+                          <span className="text-blue-400 mt-1">▸</span>
+                          <span>{task}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -211,11 +357,11 @@ export default function App() {
             </div>
           )}
 
-          {/* Education Section */}
+          {/* Education Section - */}
           {activeSection === 'education' && (
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
               <h3 className="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Ausbildung
+                {t.education.title}
               </h3>
               <div className="relative border-l-2 border-purple-500 pl-8 ml-4">
                 <div className="mb-8">
@@ -223,15 +369,19 @@ export default function App() {
                   <div className="bg-slate-700/50 rounded-lg p-6 hover:bg-slate-700/70 transition-all duration-300 border border-slate-600/50 hover:border-purple-500/50">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 gap-2">
                       <div>
-                        <h4 className="text-xl font-bold text-white mb-1">B.Sc. Informatik</h4>
-                        <p className="text-purple-400 font-semibold">Technische Universität Darmstadt</p>
+                        <h4 className="text-xl font-bold text-white mb-1">{t.education.degree}</h4>
+                        <p className="text-purple-400 font-semibold">{t.education.university}</p>
                       </div>
-                      <span className="text-gray-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full">Okt 2021 - Aktuell</span>
+                      <span className="text-gray-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full">{t.education.period}</span>
                     </div>
                     <div className="space-y-2 text-gray-300">
                       <p className="flex gap-3 hover:text-white transition-colors">
                         <span className="text-purple-400">▸</span>
-                        <span>Bachelorarbeit beim Fraunhofer SIT: "Detection von multimodalen Deepfakes"</span>
+                        <span>{t.education.thesis}</span>
+                      </p>
+                      <p className="flex gap-3 hover:text-white transition-colors">
+                        <span className="text-purple-400">▸</span>
+                        <span>{t.education.master}</span>
                       </p>
                     </div>
                   </div>
@@ -240,11 +390,11 @@ export default function App() {
             </div>
           )}
 
-          {/* Projects Section */}
+          {/* Projects Section - */}
           {activeSection === 'projects' && (
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
               <h3 className="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Projekte
+                {t.projects.title}
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Projekt 1 */}
@@ -256,16 +406,16 @@ export default function App() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                      Real-Time Deepfake Pipeline
+                      {t.projects.project1.title}
                     </h4>
                     <div className="flex gap-2">
                       <Code className="text-blue-400" size={24} />
                       <ExternalLink className="text-gray-400 group-hover:text-blue-400 transition-colors" size={20} />
                     </div>
                   </div>
-                  <p className="text-sm text-blue-400 mb-2 font-semibold">System Security Lab, TU Darmstadt</p>
+                  <p className="text-sm text-blue-400 mb-2 font-semibold">{t.projects.project1.org}</p>
                   <p className="text-gray-300 mb-4 group-hover:text-white transition-colors">
-                    Entwicklung einer Echtzeit-Pipeline zur Stimm- und Gesichtsumwandlung für Videoanwendungen mit Diff-HierVC, InsightFace und GFPGAN.
+                    {t.projects.project1.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <span className="bg-blue-600/30 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Python</span>
@@ -278,13 +428,13 @@ export default function App() {
                 <div className="bg-slate-700/50 rounded-lg p-6 hover:bg-slate-700/70 transition-all duration-300 border border-slate-600/50 hover:border-purple-500/50 hover:scale-105 group">
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">
-                      Tool Support for Sustainable Protocol Security
+                      {t.projects.project2.title}
                     </h4>
                     <Award className="text-purple-400" size={24} />
                   </div>
-                  <p className="text-sm text-purple-400 mb-2 font-semibold">SEEMOO, TU Darmstadt</p>
+                  <p className="text-sm text-purple-400 mb-2 font-semibold">{t.projects.project2.org}</p>
                   <p className="text-gray-300 mb-4 group-hover:text-white transition-colors">
-                    Entwicklung von Python-basierten Tools zur Analyse und Visualisierung von Sicherheitslücken in LoRaWAN. CLI-Integration und modernes Frontend.
+                    {t.projects.project2.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <span className="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30">Python</span>
@@ -302,22 +452,22 @@ export default function App() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
-                      Context-Aware Captions from Photos
+                      {t.projects.project3.title}
                     </h4>
                     <div className="flex gap-2">
                       <Brain className="text-green-400" size={24} />
                       <ExternalLink className="text-gray-400 group-hover:text-green-400 transition-colors" size={20} />
                     </div>
                   </div>
-                  <p className="text-sm text-green-400 mb-2 font-semibold">System Security Lab, TU Darmstadt</p>
+                  <p className="text-sm text-green-400 mb-2 font-semibold">{t.projects.project3.org}</p>
                   <p className="text-gray-300 mb-4 group-hover:text-white transition-colors">
-                    Entwicklung eines Modells zur kontextbewussten Bildbeschreibung mit BLIP-2 und GoodNews-Datensatz. Kombination von visuellen und textuellen Informationen.
+                    {t.projects.project3.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">Python</span>
-                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">PyTorch</span>
+                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">Python
+                      <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">PyTorch</span>
                     <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">NLP</span>
-                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">Transformers</span>
+                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">BLIP-2</span>
                   </div>
                 </a>
               </div>
@@ -328,16 +478,16 @@ export default function App() {
           {activeSection === 'skills' && (
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
               <h3 className="text-3xl font-bold text-white mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Technische Kompetenzen
+                {t.skills.title}
               </h3>
               <div className="grid md:grid-cols-3 gap-8">
                 <div>
                   <h4 className="text-xl font-semibold text-blue-400 mb-4 flex items-center gap-2">
                     <Code size={24} />
-                    Programmiersprachen
+                    {t.skills.languages}
                   </h4>
                   <div className="space-y-2">
-                    {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL'].map(skill => (
+                    {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL', 'C++'].map(skill => (
                       <div key={skill} className="bg-slate-700/50 px-4 py-3 rounded-lg text-gray-300 hover:bg-slate-700/70 hover:text-white hover:scale-105 transition-all duration-300 border border-slate-600/50 hover:border-blue-500/50">
                         {skill}
                       </div>
@@ -347,10 +497,10 @@ export default function App() {
                 <div>
                   <h4 className="text-xl font-semibold text-purple-400 mb-4 flex items-center gap-2">
                     <Award size={24} />
-                    Frameworks & Tools
+                    {t.skills.frameworks}
                   </h4>
                   <div className="space-y-2">
-                    {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'PyTorch', 'Hugging Face', 'TestComplete', 'ReadyAPI', 'Git', 'Docker', 'Azure DevOps'].map(skill => (
+                    {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'TestComplete', 'ReadyAPI', 'Selenium', 'Git', 'Docker', 'Azure DevOps', 'PostgreSQL', 'MongoDB'].map(skill => (
                       <div key={skill} className="bg-slate-700/50 px-4 py-3 rounded-lg text-gray-300 hover:bg-slate-700/70 hover:text-white hover:scale-105 transition-all duration-300 border border-slate-600/50 hover:border-purple-500/50">
                         {skill}
                       </div>
@@ -360,10 +510,10 @@ export default function App() {
                 <div>
                   <h4 className="text-xl font-semibold text-green-400 mb-4 flex items-center gap-2">
                     <Brain size={24} />
-                    Machine Learning & AI
+                    {t.skills.ml}
                   </h4>
                   <div className="space-y-2">
-                    {['Deep Learning', 'Computer Vision', 'Natural Language Processing', 'Model Fine-Tuning', 'Transformer-Models', 'CNNs'].map(skill => (
+                    {['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning', 'CNNs', 'Transformers'].map(skill => (
                       <div key={skill} className="bg-slate-700/50 px-4 py-3 rounded-lg text-gray-300 hover:bg-slate-700/70 hover:text-white hover:scale-105 transition-all duration-300 border border-slate-600/50 hover:border-green-500/50">
                         {skill}
                       </div>
@@ -381,7 +531,7 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400">
-              © 2025 Ali Shariati Najafabadi. Alle Rechte vorbehalten.
+              {t.footer.rights}
             </p>
             <div className="flex gap-4">
               <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
