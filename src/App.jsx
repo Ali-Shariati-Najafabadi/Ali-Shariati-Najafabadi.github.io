@@ -464,8 +464,8 @@ export default function App() {
                     {t.projects.project3.desc}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">Python
-                      <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">PyTorch</span>
+                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">Python</span>
+                    <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">PyTorch</span>
                     <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">NLP</span>
                     <span className="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm border border-green-500/30">BLIP-2</span>
                   </div>
