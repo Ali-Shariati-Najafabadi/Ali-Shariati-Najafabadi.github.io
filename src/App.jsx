@@ -243,7 +243,7 @@ export default function App() {
                   <Github size={20} />
                   GitHub
                 </a>
-                <a href="/lebenslauf.pdf" download className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-500 to-purple-500 hover:from-fuchsia-600 hover:to-purple-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-fuchsia-500/50">
+                <a href="https://drive.google.com/file/d/1akL79j8rGwaduOdEle3y33AehPmTY1cb/view?usp=sharing" download className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-500 to-purple-500 hover:from-fuchsia-600 hover:to-purple-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg shadow-fuchsia-500/50">
                   <Download size={20} />
                   {t.hero.cv}
                 </a>
