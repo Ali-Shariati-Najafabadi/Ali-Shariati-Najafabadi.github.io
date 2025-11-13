@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, Mail, Phone, MapPin, Calendar, Code, Brain, Award, ExternalLink, Download, Globe } from 'lucide-react';
+import { Github, Mail, Phone, MapPin, Calendar, Code, Brain, Award, ExternalLink, Download, Globe, Briefcase } from 'lucide-react';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('experience');
@@ -12,7 +12,8 @@ export default function App() {
         experience: 'Berufserfahrung',
         education: 'Ausbildung',
         projects: 'Projekte',
-        skills: 'Kompetenzen'
+        skills: 'Kompetenzen',
+        timeline: 'Mein Weg'
       },
       hero: {
         title: 'Ali Shariati Najafabadi',
@@ -79,6 +80,93 @@ export default function App() {
         frameworks: 'Frameworks & Tools',
         ml: 'Machine Learning & AI'
       },
+      timeline: {
+        title: 'Mein Weg',
+        subtitle: 'Eine interaktive Reise durch meine akademische und berufliche Laufbahn',
+        events: [
+          {
+            year: '2021',
+            month: 'Okt',
+            title: 'Studienstart: Informatik B.Sc.',
+            organization: 'TU Darmstadt',
+            description: 'Beginn des Informatikstudiums an der Technischen Universität Darmstadt',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2022',
+            month: 'Apr',
+            title: 'Erste Programmierprojekte',
+            organization: 'TU Darmstadt',
+            description: 'Vertiefung in objektorientierter Programmierung und Algorithmen',
+            type: 'education',
+            icon: 'Code'
+          },
+          {
+            year: '2023',
+            month: 'Aug',
+            title: 'Start als Werkstudent',
+            organization: 'Fraport AG',
+            description: 'Beginn der Werkstudententätigkeit in Softwareentwicklung & Testautomatisierung',
+            type: 'work',
+            icon: 'Briefcase'
+          },
+          {
+            year: '2024',
+            month: 'Feb',
+            title: 'Context-Aware Captions Projekt',
+            organization: 'System Security Lab, TU Darmstadt',
+            description: 'Training eines BLIP-2-Modells zur kontextbewussten Bildbeschreibung',
+            type: 'project',
+            icon: 'Brain'
+          },
+          {
+            year: '2024',
+            month: 'Jun',
+            title: 'LoRaWAN Security Tool',
+            organization: 'SEEMOO, TU Darmstadt',
+            description: 'Entwicklung einer Full-Stack-Webanwendung zur Analyse von Sicherheitslücken',
+            type: 'project',
+            icon: 'Code'
+          },
+          {
+            year: '2024',
+            month: 'Sep',
+            title: 'Real-Time Deepfake Pipeline',
+            organization: 'System Security Lab, TU Darmstadt',
+            description: 'Entwicklung einer Echtzeit-Pipeline zur Stimm- und Gesichtsumwandlung',
+            type: 'project',
+            icon: 'Brain'
+          },
+          {
+            year: '2025',
+            month: 'Jan',
+            title: 'Bachelor-Thesis',
+            organization: 'Fraunhofer SIT',
+            description: 'Start der Bachelor-Arbeit: "Detection of Multimodal Deepfakes"',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2026',
+            month: 'Mär',
+            title: 'Bachelor-Abschluss',
+            organization: 'TU Darmstadt',
+            description: 'Geplanter Abschluss des B.Sc. Informatik',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2026',
+            month: 'Apr',
+            title: 'Master-Start',
+            organization: 'TU Darmstadt',
+            description: 'Geplanter Beginn des Master-Studiums Informatik',
+            type: 'education',
+            icon: 'Award'
+          }
+        ]
+      },
       footer: {
         rights: '© 2025 Ali Shariati Najafabadi. Alle Rechte vorbehalten.'
       }
@@ -89,7 +177,8 @@ export default function App() {
         experience: 'Experience',
         education: 'Education',
         projects: 'Projects',
-        skills: 'Skills'
+        skills: 'Skills',
+        timeline: 'My Journey'
       },
       hero: {
         title: 'Ali Shariati Najafabadi',
@@ -155,6 +244,93 @@ export default function App() {
         languages: 'Programming Languages',
         frameworks: 'Frameworks & Tools',
         ml: 'Machine Learning & AI'
+      },
+      timeline: {
+        title: 'My Journey',
+        subtitle: 'An interactive journey through my academic and professional career',
+        events: [
+          {
+            year: '2021',
+            month: 'Oct',
+            title: 'Started B.Sc. Computer Science',
+            organization: 'TU Darmstadt',
+            description: 'Began Computer Science studies at Technical University of Darmstadt',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2022',
+            month: 'Apr',
+            title: 'First Programming Projects',
+            organization: 'TU Darmstadt',
+            description: 'Deep dive into object-oriented programming and algorithms',
+            type: 'education',
+            icon: 'Code'
+          },
+          {
+            year: '2023',
+            month: 'Aug',
+            title: 'Started Working Student Position',
+            organization: 'Fraport AG',
+            description: 'Began working student position in software development & test automation',
+            type: 'work',
+            icon: 'Briefcase'
+          },
+          {
+            year: '2024',
+            month: 'Feb',
+            title: 'Context-Aware Captions Project',
+            organization: 'System Security Lab, TU Darmstadt',
+            description: 'Training BLIP-2 model for context-aware image captioning',
+            type: 'project',
+            icon: 'Brain'
+          },
+          {
+            year: '2024',
+            month: 'Jun',
+            title: 'LoRaWAN Security Tool',
+            organization: 'SEEMOO, TU Darmstadt',
+            description: 'Development of full-stack web application for security vulnerability analysis',
+            type: 'project',
+            icon: 'Code'
+          },
+          {
+            year: '2024',
+            month: 'Sep',
+            title: 'Real-Time Deepfake Pipeline',
+            organization: 'System Security Lab, TU Darmstadt',
+            description: 'Development of real-time pipeline for voice and face conversion',
+            type: 'project',
+            icon: 'Brain'
+          },
+          {
+            year: '2025',
+            month: 'Jan',
+            title: 'Bachelor Thesis',
+            organization: 'Fraunhofer SIT',
+            description: 'Started Bachelor thesis: "Detection of Multimodal Deepfakes"',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2026',
+            month: 'Mar',
+            title: 'Bachelor Graduation',
+            organization: 'TU Darmstadt',
+            description: 'Planned completion of B.Sc. Computer Science',
+            type: 'education',
+            icon: 'Award'
+          },
+          {
+            year: '2026',
+            month: 'Apr',
+            title: 'Master\'s Program Start',
+            organization: 'TU Darmstadt',
+            description: 'Planned start of Master\'s program in Computer Science',
+            type: 'education',
+            icon: 'Award'
+          }
+        ]
       },
       footer: {
         rights: '© 2025 Ali Shariati Najafabadi. All rights reserved.'
@@ -519,6 +695,89 @@ export default function App() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Timeline Section */}
+          {activeSection === 'timeline' && (
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-fade-in">
+              <h3 className="text-3xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                {t.timeline.title}
+              </h3>
+              <p className="text-gray-300 mb-8 text-lg">{t.timeline.subtitle}</p>
+
+              {/* Timeline Container */}
+              <div className="relative">
+                {/* Center Line */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 opacity-30 hidden md:block"></div>
+
+                {/* Timeline Events */}
+                <div className="space-y-12">
+                  {t.timeline.events.map((event, index) => {
+                    const isLeft = index % 2 === 0;
+                    const IconComponent = event.icon === 'Award' ? Award : event.icon === 'Code' ? Code : event.icon === 'Brain' ? Brain : Briefcase;
+
+                    const typeColors = {
+                      education: 'from-blue-500 to-blue-600',
+                      work: 'from-purple-500 to-purple-600',
+                      project: 'from-green-500 to-green-600'
+                    };
+
+                    const borderColors = {
+                      education: 'border-blue-500/50',
+                      work: 'border-purple-500/50',
+                      project: 'border-green-500/50'
+                    };
+
+                    const hoverBorderColors = {
+                      education: 'hover:border-blue-400',
+                      work: 'hover:border-purple-400',
+                      project: 'hover:border-green-400'
+                    };
+
+                    return (
+                      <div key={index} className={`relative flex items-center ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col gap-8`}>
+                        {/* Content Card */}
+                        <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
+                          <div className={`bg-slate-700/50 rounded-xl p-6 border ${borderColors[event.type]} ${hoverBorderColors[event.type]} hover:bg-slate-700/70 transition-all duration-300 hover:scale-105 group`}>
+                            <div className="flex items-start justify-between gap-4 mb-3">
+                              <div className={`flex-1 ${isLeft ? 'md:order-2' : 'md:order-1'}`}>
+                                <h4 className="text-xl font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all">
+                                  {event.title}
+                                </h4>
+                                <p className={`text-sm font-semibold mb-2 ${event.type === 'education' ? 'text-blue-400' : event.type === 'work' ? 'text-purple-400' : 'text-green-400'}`}>
+                                  {event.organization}
+                                </p>
+                              </div>
+                              <div className={`${isLeft ? 'md:order-1' : 'md:order-2'}`}>
+                                <IconComponent className={`${event.type === 'education' ? 'text-blue-400' : event.type === 'work' ? 'text-purple-400' : 'text-green-400'}`} size={28} />
+                              </div>
+                            </div>
+                            <p className="text-gray-300 group-hover:text-white transition-colors">
+                              {event.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Center Dot with Year */}
+                        <div className="flex md:w-2/12 items-center justify-center relative z-10">
+                          <div className="flex flex-col items-center">
+                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${typeColors[event.type]} flex items-center justify-center shadow-lg border-4 border-slate-900 animate-pulse`}>
+                              <div className="text-white font-bold text-sm text-center">
+                                <div>{event.month}</div>
+                                <div className="text-xs">{event.year}</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Empty Space for Alternating Layout */}
+                        <div className="hidden md:block w-5/12"></div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
