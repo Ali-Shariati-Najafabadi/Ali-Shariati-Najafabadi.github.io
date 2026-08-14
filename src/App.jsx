@@ -264,11 +264,11 @@ export default function App() {
       {/* Hero */}
       <section className="container mx-auto px-6 py-16 md:py-24">
         <div className="flex flex-col md:flex-row items-start gap-12 max-w-5xl mx-auto">
-          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 border border-line overflow-hidden">
+          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 border border-line overflow-hidden hover:border-accent transition-colors duration-300">
             <img
-              src="https://i.imgur.com/F0IviBD.jpeg"
+              src="/IMG_5354.PNG"
               alt="Ali Shariati Najafabadi"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-4xl font-serif text-ink bg-paper">AS</div>';
