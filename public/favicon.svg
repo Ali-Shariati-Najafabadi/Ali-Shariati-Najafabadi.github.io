@@ -1,4 +1,11 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" fill="#b8452f"/>
-  <text x="32" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="700" fill="#f7f2e7" text-anchor="middle">A</text>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7c6cff"/>
+      <stop offset="1" stop-color="#3ee8c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0a0d16"/>
+  <rect width="64" height="64" rx="14" fill="url(#g)" fill-opacity="0.18"/>
+  <text x="32" y="45" font-family="'Space Grotesk', Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="url(#g)" text-anchor="middle">A</text>
 </svg>
