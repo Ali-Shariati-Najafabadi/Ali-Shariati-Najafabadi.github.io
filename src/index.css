@@ -7,9 +7,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light;
-  color: #201c18;
-  background-color: #f7f2e7;
+  color-scheme: dark;
+  color: #eef1f8;
+  background-color: #0a0d16;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -61,27 +61,27 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f7f2e7;
+  background: #0a0d16;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ddd2ba;
+  background: #232b42;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b8452f;
+  background: #7c6cff;
 }
 
 /* Selection */
 ::selection {
-  background-color: #b8452f;
-  color: #f7f2e7;
+  background-color: #7c6cff;
+  color: #eef1f8;
 }
 
 /* Focus Styles */
 button:focus,
 a:focus {
-  outline: 2px solid #b8452f;
+  outline: 2px solid #7c6cff;
   outline-offset: 2px;
 }
