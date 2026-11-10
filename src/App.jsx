@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
-import { Github, Mail, Phone, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Github, Mail, Phone, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin, ShieldCheck, Fingerprint, GraduationCap, ArrowDown } from 'lucide-react';
+
+function Section({ id, index, title, children }) {
+  return (
+    <section id={id} className="scroll-mt-28">
+      <div className="relative mb-8">
+        <span className="absolute -top-8 -left-1 font-heading text-6xl md:text-7xl font-bold text-white/5 select-none pointer-events-none">
+          {index}
+        </span>
+        <h2 className="relative font-heading text-2xl md:text-3xl font-semibold text-text pt-2">{title}</h2>
+      </div>
+      {children}
+    </section>
+  );
+}
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState('experience');
+  const [activeSection, setActiveSection] = useState('hero');
   const [language, setLanguage] = useState('de');
 
   const translations = {
@@ -218,289 +232,304 @@ export default function App() {
     skills: '05'
   };
 
+  useEffect(() => {
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+    ['hero', ...sectionKeys].forEach((key) => {
+      const el = document.getElementById(key);
+      if (el) navObserver.observe(el);
+    });
+    return () => navObserver.disconnect();
+  }, []);
+
+  const tileBase = 'bg-surface/70 backdrop-blur-xl border border-white/10 rounded-[28px]';
+
   return (
-    <div className="min-h-screen bg-bg text-text flex flex-col font-sans relative overflow-x-hidden">
-      {/* Decorative glow background */}
+    <div className="min-h-screen bg-bg text-text font-sans relative overflow-x-hidden">
+      {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div className="absolute -top-40 -left-32 w-[28rem] h-[28rem] rounded-full bg-accent/20 blur-[120px] animate-aurora-1" />
-        <div className="absolute top-1/3 -right-40 w-[24rem] h-[24rem] rounded-full bg-accent2/10 blur-[120px] animate-aurora-2" />
-        <div className="absolute bottom-0 left-1/3 w-[20rem] h-[20rem] rounded-full bg-accent/10 blur-[120px] animate-aurora-2" />
+        <div className="absolute -top-40 -left-32 w-[28rem] h-[28rem] rounded-full bg-accent/10 blur-[140px] animate-aurora-1" />
+        <div className="absolute top-1/3 -right-40 w-[24rem] h-[24rem] rounded-full bg-accent2/10 blur-[140px] animate-aurora-2" />
+        <div className="absolute bottom-0 left-1/4 w-[20rem] h-[20rem] rounded-full bg-accent/5 blur-[140px] animate-aurora-2" />
       </div>
 
       {/* Header / Nav */}
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-bg/70 backdrop-blur-xl">
-        <nav className="container mx-auto px-6 py-5">
-          <div className="flex flex-wrap justify-between items-center gap-4">
-            <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted">
-              Ali Shariati Najafabadi
-            </span>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex gap-2 font-mono text-xs uppercase tracking-wider bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full p-1">
-                {sectionKeys.map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveSection(key)}
-                    className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
-                      activeSection === key
-                        ? 'bg-accent-gradient text-bg font-semibold shadow-glow'
-                        : 'text-muted hover:text-text hover:bg-white/5'
-                    }`}
-                  >
-                    {t.sections[key]}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-                className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-white/10 rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors"
-              >
-                <Globe size={14} />
-                {language === 'de' ? 'EN' : 'DE'}
-              </button>
-            </div>
-          </div>
-          {/* Mobile nav */}
-          <div className="flex md:hidden gap-2 font-mono text-xs uppercase tracking-wider mt-4 overflow-x-auto">
+      <header className="sticky top-0 z-30 border-b border-white/10 bg-bg/70 backdrop-blur-xl">
+        <nav className="container mx-auto px-6 py-4 flex items-center justify-between gap-4">
+          <a href="#hero" className="font-mono text-xs tracking-[0.2em] uppercase text-muted hover:text-accent transition-colors">
+            Ali Shariati Najafabadi
+          </a>
+          <div className="hidden md:flex items-center gap-7">
             {sectionKeys.map((key) => (
-              <button
+              <a
                 key={key}
-                onClick={() => setActiveSection(key)}
-                className={`px-4 py-1.5 rounded-full whitespace-nowrap border transition-colors duration-200 ${
-                  activeSection === key
-                    ? 'bg-accent-gradient text-bg font-semibold border-transparent'
-                    : 'text-muted border-white/10'
+                href={`#${key}`}
+                className={`relative font-mono text-xs uppercase tracking-wider pb-1 transition-colors ${
+                  activeSection === key ? 'text-accent' : 'text-muted hover:text-text'
                 }`}
               >
                 {t.sections[key]}
-              </button>
+                <span
+                  className={`absolute left-0 right-0 -bottom-0.5 h-[2px] bg-accent-gradient rounded-full origin-left transition-transform duration-300 ${
+                    activeSection === key ? 'scale-x-100' : 'scale-x-0'
+                  }`}
+                />
+              </a>
             ))}
           </div>
+          <button
+            onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+            className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-white/10 rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors shrink-0"
+          >
+            <Globe size={14} />
+            {language === 'de' ? 'EN' : 'DE'}
+          </button>
         </nav>
+        {/* Mobile nav */}
+        <div className="flex md:hidden gap-2 font-mono text-xs uppercase tracking-wider px-6 pb-4 overflow-x-auto">
+          {sectionKeys.map((key) => (
+            <a
+              key={key}
+              href={`#${key}`}
+              className={`px-3 py-1.5 rounded-full whitespace-nowrap border transition-colors duration-200 ${
+                activeSection === key
+                  ? 'bg-accent-gradient text-bg font-semibold border-transparent'
+                  : 'text-muted border-white/10'
+              }`}
+            >
+              {t.sections[key]}
+            </a>
+          ))}
+        </div>
       </header>
 
-      {/* Hero */}
-      <section className="container mx-auto px-6 py-16 md:py-24 relative z-10">
-        <div className="flex flex-col md:flex-row items-start gap-12 max-w-5xl mx-auto">
-          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 rounded-3xl p-1 bg-accent-gradient animate-ring-pulse">
-            <div className="w-full h-full rounded-[20px] overflow-hidden bg-surface">
-              <img
-                src="/IMG_5354.PNG"
-                alt="Ali Shariati Najafabadi"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-4xl font-heading font-semibold text-text bg-surface">AS</div>';
-                }}
-              />
-            </div>
-          </div>
+      <main className="relative z-10">
+        <div className="container mx-auto px-6 max-w-6xl py-10 md:py-14 space-y-16 md:space-y-24">
 
-          <div className="flex-1">
-            <h1 className="font-heading text-5xl md:text-6xl font-semibold leading-[1.05] mb-5 bg-accent-gradient bg-clip-text text-transparent">
-              {t.hero.title}
-            </h1>
-            <p className="text-lg md:text-xl text-muted leading-relaxed mb-5 max-w-xl">
-              {t.hero.subtitle}
-            </p>
-            <p className="inline-block font-mono text-xs text-accent uppercase tracking-wide mb-8 border border-accent/40 bg-accent/10 rounded-full px-4 py-1.5">
-              {t.hero.tagline}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                <Mail size={16} />
-                {t.hero.contact}
-              </a>
-              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                <Github size={16} />
-                GitHub
-              </a>
-              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                <Linkedin size={16} />
-                LinkedIn
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-6 pb-20 flex-1 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* About Section */}
-          {activeSection === 'about' && (
-            <div className="animate-fade-in">
-              <div className="flex items-center gap-4 mb-10">
-                <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-gradient text-bg font-mono text-sm font-semibold shrink-0">{sectionIndex.about}</span>
-                <h2 className="font-heading text-3xl font-semibold text-text">{t.about.title}</h2>
+          {/* Hero */}
+          <section id="hero" className="scroll-mt-28">
+            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-surface/70 backdrop-blur-xl p-8 md:p-14">
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute -top-24 -left-20 w-72 h-72 rounded-full bg-accent/30 blur-[100px] animate-aurora-1" />
+                <div className="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-accent2/20 blur-[100px] animate-aurora-2" />
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-5">
-                  <div className="flex items-start gap-3 pb-4 border-b border-white/10">
-                    <Mail className="mt-1 text-accent" size={18} />
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.email}</p>
-                      <a href="mailto:alishariaty0854@gmail.com" className="hover:text-accent transition-colors">
-                        alishariaty0854@gmail.com
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 pb-4 border-b border-white/10">
-                    <Phone className="mt-1 text-accent" size={18} />
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.phone}</p>
-                      <a href="tel:+4915754703516" className="hover:text-accent transition-colors">
-                        +49 157 54703516
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="mt-1 text-accent" size={18} />
-                    <div>
-                      <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.location}</p>
-                      <p>{t.about.locationValue}</p>
-                    </div>
+              <div className="relative flex flex-col md:flex-row items-start md:items-center gap-10">
+                <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-[28px] p-1 bg-accent-gradient animate-ring-pulse">
+                  <div className="w-full h-full rounded-[24px] overflow-hidden bg-surface">
+                    <img
+                      src="/IMG_5354.PNG"
+                      alt="Ali Shariati Najafabadi"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-4xl font-heading font-semibold text-text bg-surface">AS</div>';
+                      }}
+                    />
                   </div>
                 </div>
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-5">{t.about.languages}</h3>
-                  <div className="space-y-5">
-                    {[
-                      { label: t.about.german, level: t.about.advanced, fill: '80%' },
-                      { label: t.about.english, level: t.about.advanced, fill: '80%' },
-                      { label: t.about.persian, level: t.about.native, fill: '100%' }
-                    ].map((lang) => (
-                      <div key={lang.label}>
-                        <div className="flex justify-between mb-2">
-                          <span className="font-medium">{lang.label}</span>
-                          <span className="font-mono text-xs text-accent uppercase">{lang.level}</span>
-                        </div>
-                        <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                          <div className="h-full bg-accent-gradient rounded-full" style={{ width: lang.fill }}></div>
-                        </div>
-                      </div>
-                    ))}
+
+                <div className="flex-1">
+                  <h1
+                    className="font-heading text-5xl md:text-7xl font-semibold leading-[1.02] tracking-tight mb-5 bg-accent-shimmer bg-clip-text text-transparent animate-shimmer"
+                    style={{ backgroundSize: '200% auto' }}
+                  >
+                    {t.hero.title}
+                  </h1>
+                  <p className="text-lg md:text-xl text-muted leading-relaxed mb-5 max-w-xl">
+                    {t.hero.subtitle}
+                  </p>
+                  <p className="inline-block font-mono text-xs text-accent uppercase tracking-wide mb-8 border border-accent/40 bg-accent/10 rounded-full px-4 py-1.5">
+                    {t.hero.tagline}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
+                      <Mail size={16} />
+                      {t.hero.contact}
+                    </a>
+                    <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
+                      <Github size={16} />
+                      GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
+                      <Linkedin size={16} />
+                      LinkedIn
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+            <div className="flex justify-center mt-8">
+              <a href="#about" className="flex flex-col items-center gap-1 text-muted hover:text-accent transition-colors animate-bounce" aria-label="Scroll down">
+                <ArrowDown size={18} />
+              </a>
+            </div>
+          </section>
 
-          {/* Experience Section */}
-          {activeSection === 'experience' && (
-            <div className="animate-fade-in">
-              <div className="flex items-center gap-4 mb-10">
-                <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-gradient text-bg font-mono text-sm font-semibold shrink-0">{sectionIndex.experience}</span>
-                <h2 className="font-heading text-3xl font-semibold text-text">{t.experience.title}</h2>
-              </div>
-              <div className="space-y-6">
-                {t.experience.positions.map((job, index) => (
-                  <div key={index} className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-3 gap-1">
-                      <div>
-                        <h3 className="text-xl font-semibold text-text flex items-center gap-2">
-                          <Briefcase className="text-accent" size={18} />
-                          {job.position}
-                        </h3>
-                        <p className="text-muted">{job.company}</p>
-                      </div>
-                      <span className="font-mono text-xs uppercase tracking-wider text-accent shrink-0">{job.period}</span>
-                    </div>
-                    {job.tasks.length > 0 && (
-                      <ul className="space-y-2.5 mt-4">
-                        {job.tasks.map((task, i) => (
-                          <li key={i} className="flex gap-3 text-muted">
-                            <span className="text-accent">—</span>
-                            <span>{task}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+          {/* About */}
+          <Section id="about" index={sectionIndex.about} title={t.about.title}>
+            <div className="grid md:grid-cols-3 gap-5">
+              <div className={`${tileBase} md:col-span-2 p-6 md:p-8 grid sm:grid-cols-3 gap-6`}>
+                <div className="flex items-start gap-3">
+                  <Mail className="mt-1 text-accent shrink-0" size={18} />
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.email}</p>
+                    <a href="mailto:alishariaty0854@gmail.com" className="hover:text-accent transition-colors break-all">
+                      alishariaty0854@gmail.com
+                    </a>
                   </div>
-                ))}
+                </div>
+                <div className="flex items-start gap-3">
+                  <Phone className="mt-1 text-accent shrink-0" size={18} />
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.phone}</p>
+                    <a href="tel:+4915754703516" className="hover:text-accent transition-colors">
+                      +49 157 54703516
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-1 text-accent shrink-0" size={18} />
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.location}</p>
+                    <p>{t.about.locationValue}</p>
+                  </div>
+                </div>
+              </div>
+              <div className={`${tileBase} p-6 md:p-8`}>
+                <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-5">{t.about.languages}</h3>
+                <div className="space-y-5">
+                  {[
+                    { label: t.about.german, level: t.about.advanced, fill: '80%' },
+                    { label: t.about.english, level: t.about.advanced, fill: '80%' },
+                    { label: t.about.persian, level: t.about.native, fill: '100%' }
+                  ].map((lang) => (
+                    <div key={lang.label}>
+                      <div className="flex justify-between mb-2">
+                        <span className="font-medium">{lang.label}</span>
+                        <span className="font-mono text-xs text-accent uppercase">{lang.level}</span>
+                      </div>
+                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-accent-gradient rounded-full" style={{ width: lang.fill }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          )}
+          </Section>
 
-          {/* Education Section */}
-          {activeSection === 'education' && (
-            <div className="animate-fade-in">
-              <div className="flex items-center gap-4 mb-10">
-                <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-gradient text-bg font-mono text-sm font-semibold shrink-0">{sectionIndex.education}</span>
-                <h2 className="font-heading text-3xl font-semibold text-text">{t.education.title}</h2>
-              </div>
-              <div className="space-y-6">
-                {t.education.positions.map((edu, index) => (
-                  <div key={index} className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-3 gap-1">
-                      <div>
-                        <h3 className="text-xl font-semibold text-text flex items-center gap-2">
-                          <Award className="text-accent" size={18} />
-                          {edu.degree}
-                        </h3>
-                        <p className="text-muted">{edu.university}</p>
-                      </div>
-                      <span className="font-mono text-xs uppercase tracking-wider text-accent shrink-0">{edu.period}</span>
-                    </div>
-                    {edu.note && (
-                      <p className="text-muted mt-4">{edu.note}</p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Projects Section */}
-          {activeSection === 'projects' && (
-            <div className="animate-fade-in">
-              <div className="flex items-center gap-4 mb-10">
-                <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-gradient text-bg font-mono text-sm font-semibold shrink-0">{sectionIndex.projects}</span>
-                <h2 className="font-heading text-3xl font-semibold text-text">{t.projects.title}</h2>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                <a
-                  href="https://github.com/Ali-Shariati-Najafabadi/Real-Time-Deepfake-Pipeline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
+          {/* Experience */}
+          <Section id="experience" index={sectionIndex.experience} title={t.experience.title}>
+            <div className="grid md:grid-cols-3 gap-5">
+              {t.experience.positions.map((job, index) => (
+                <div
+                  key={index}
+                  className={`${tileBase} p-6 md:p-8 hover:border-accent/50 transition-colors duration-300 ${
+                    job.tasks.length > 0 ? 'md:col-span-2' : 'md:col-span-1'
+                  }`}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Code size={20} /></span>
-                    <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                  <div className="flex flex-col gap-1 mb-3">
+                    <h3 className="text-xl font-semibold text-text flex items-center gap-2">
+                      <Briefcase className="text-accent shrink-0" size={18} />
+                      {job.position}
+                    </h3>
+                    <p className="text-muted">{job.company}</p>
+                    <span className="font-mono text-xs uppercase tracking-wider text-accent">{job.period}</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-text mb-1">
-                    {t.projects.project1.title}
-                  </h3>
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project1.org}</p>
-                  <p className="text-muted mb-4">{t.projects.project1.desc}</p>
-                  <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">Computer Vision</span>
-                  </div>
-                </a>
-
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group">
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Award size={20} /></span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-text mb-1">
-                    {t.projects.project2.title}
-                  </h3>
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project2.org}</p>
-                  <p className="text-muted mb-4">{t.projects.project2.desc}</p>
-                  <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">React</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">Security</span>
-                  </div>
+                  {job.tasks.length > 0 && (
+                    <ul className="space-y-2.5 mt-4">
+                      {job.tasks.map((task, i) => (
+                        <li key={i} className="flex gap-3 text-muted">
+                          <span className="text-accent">—</span>
+                          <span>{task}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
+              ))}
+            </div>
+          </Section>
 
+          {/* Education */}
+          <Section id="education" index={sectionIndex.education} title={t.education.title}>
+            <div className="grid md:grid-cols-3 gap-5">
+              {t.education.positions.map((edu, index) => (
+                <div
+                  key={index}
+                  className={`${tileBase} p-6 md:p-8 hover:border-accent/50 transition-colors duration-300 ${
+                    edu.note ? 'md:col-span-2' : 'md:col-span-1'
+                  }`}
+                >
+                  <div className="flex flex-col gap-1 mb-3">
+                    <h3 className="text-xl font-semibold text-text flex items-center gap-2">
+                      <GraduationCap className="text-accent shrink-0" size={18} />
+                      {edu.degree}
+                    </h3>
+                    <p className="text-muted">{edu.university}</p>
+                    <span className="font-mono text-xs uppercase tracking-wider text-accent">{edu.period}</span>
+                  </div>
+                  {edu.note && (
+                    <p className="text-muted mt-4">{edu.note}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          {/* Projects */}
+          <Section id="projects" index={sectionIndex.projects} title={t.projects.title}>
+            <div className="grid md:grid-cols-3 gap-5">
+              <a
+                href="https://github.com/Ali-Shariati-Najafabadi/Real-Time-Deepfake-Pipeline"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${tileBase} md:col-span-2 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Code size={20} /></span>
+                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                </div>
+                <h3 className="text-lg font-semibold text-text mb-1">
+                  {t.projects.project1.title}
+                </h3>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project1.org}</p>
+                <p className="text-muted mb-4">{t.projects.project1.desc}</p>
+                <div className="flex flex-wrap gap-2 font-mono text-xs">
+                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">Computer Vision</span>
+                </div>
+              </a>
+
+              <div className={`${tileBase} md:col-span-1 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}>
+                <div className="flex items-start justify-between mb-3">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><ShieldCheck size={20} /></span>
+                </div>
+                <h3 className="text-lg font-semibold text-text mb-1">
+                  {t.projects.project2.title}
+                </h3>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project2.org}</p>
+                <p className="text-muted mb-4">{t.projects.project2.desc}</p>
+                <div className="flex flex-wrap gap-2 font-mono text-xs">
+                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">React</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">Security</span>
+                </div>
+              </div>
+
+              <div className={`${tileBase} md:col-span-1 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}>
                 <a
                   href="https://github.com/Ali-Shariati-Najafabadi/Generate-Context-Aware-Captions-from-Photos"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
+                  className="block"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Brain size={20} /></span>
@@ -518,83 +547,77 @@ export default function App() {
                     <span className="border border-white/10 rounded-full px-3 py-1">BLIP-2</span>
                   </div>
                 </a>
-
-                <a
-                  href="https://github.com/Ali-Shariati-Najafabadi/multimodal-deepfake-detection"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><ShieldCheck size={20} /></span>
-                    <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text mb-1">
-                    {t.projects.project4.title}
-                  </h3>
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project4.org}</p>
-                  <p className="text-muted mb-4">{t.projects.project4.desc}</p>
-                  <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">HuBERT</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">Transformers</span>
-                  </div>
-                </a>
               </div>
+
+              <a
+                href="https://github.com/Ali-Shariati-Najafabadi/multimodal-deepfake-detection"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${tileBase} md:col-span-2 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Fingerprint size={20} /></span>
+                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                </div>
+                <h3 className="text-lg font-semibold text-text mb-1">
+                  {t.projects.project4.title}
+                </h3>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project4.org}</p>
+                <p className="text-muted mb-4">{t.projects.project4.desc}</p>
+                <div className="flex flex-wrap gap-2 font-mono text-xs">
+                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">HuBERT</span>
+                  <span className="border border-white/10 rounded-full px-3 py-1">Transformers</span>
+                </div>
+              </a>
             </div>
-          )}
+          </Section>
 
-          {/* Skills Section */}
-          {activeSection === 'skills' && (
-            <div className="animate-fade-in">
-              <div className="flex items-center gap-4 mb-10">
-                <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-gradient text-bg font-mono text-sm font-semibold shrink-0">{sectionIndex.skills}</span>
-                <h2 className="font-heading text-3xl font-semibold text-text">{t.skills.title}</h2>
+          {/* Skills */}
+          <Section id="skills" index={sectionIndex.skills} title={t.skills.title}>
+            <div className="grid md:grid-cols-3 gap-5">
+              <div className={`${tileBase} p-6 md:p-8`}>
+                <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
+                  <Code size={16} className="text-accent" />
+                  {t.skills.languages}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL', 'C++'].map(skill => (
+                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                    <Code size={16} className="text-accent" />
-                    {t.skills.languages}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL', 'C++'].map(skill => (
-                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+              <div className={`${tileBase} p-6 md:p-8`}>
+                <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
+                  <Award size={16} className="text-accent" />
+                  {t.skills.frameworks}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'TestComplete', 'ReadyAPI', 'Selenium', 'Git', 'Docker', 'Azure DevOps', 'PostgreSQL', 'MongoDB'].map(skill => (
+                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                    <Award size={16} className="text-accent" />
-                    {t.skills.frameworks}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'TestComplete', 'ReadyAPI', 'Selenium', 'Git', 'Docker', 'Azure DevOps', 'PostgreSQL', 'MongoDB'].map(skill => (
-                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                    <Brain size={16} className="text-accent" />
-                    {t.skills.ml}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning', 'CNNs', 'Transformers'].map(skill => (
-                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+              </div>
+              <div className={`${tileBase} p-6 md:p-8`}>
+                <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
+                  <Brain size={16} className="text-accent" />
+                  {t.skills.ml}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning', 'CNNs', 'Transformers'].map(skill => (
+                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </Section>
         </div>
       </main>
 

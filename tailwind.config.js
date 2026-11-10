@@ -26,6 +26,7 @@ export default {
       },
       backgroundImage: {
         'accent-gradient': 'linear-gradient(90deg, #7c6cff 0%, #3ee8c8 100%)',
+        'accent-shimmer': 'linear-gradient(90deg, #7c6cff, #3ee8c8, #7c6cff, #3ee8c8)',
       },
     },
   },

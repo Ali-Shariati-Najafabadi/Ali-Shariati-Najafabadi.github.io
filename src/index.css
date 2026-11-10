@@ -81,10 +81,22 @@ body {
   animation: ring-pulse 4s ease-in-out infinite;
 }
 
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 6s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-aurora-1,
   .animate-aurora-2,
   .animate-ring-pulse,
+  .animate-shimmer,
+  .animate-bounce,
   .animate-fade-in {
     animation: none !important;
   }
