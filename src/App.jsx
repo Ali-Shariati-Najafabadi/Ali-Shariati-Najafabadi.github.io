@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Mail, Phone, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin, ShieldCheck, Fingerprint, GraduationCap, ArrowDown } from 'lucide-react';
+import { Github, Mail, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin, ShieldCheck, Fingerprint, GraduationCap, ArrowDown } from 'lucide-react';
 
 function Section({ id, index, title, children }) {
   return (
     <section id={id} className="scroll-mt-28">
-      <div className="relative mb-8">
-        <span className="absolute -top-8 -left-1 font-heading text-6xl md:text-7xl font-bold text-white/5 select-none pointer-events-none">
-          {index}
-        </span>
-        <h2 className="relative font-heading text-2xl md:text-3xl font-semibold text-text pt-2">{title}</h2>
+      <div className="mb-10">
+        <span className="font-mono text-xs tracking-[0.25em] text-muted">{index} / 05</span>
+        <h2 className="font-heading text-4xl md:text-5xl text-text mt-2">{title}</h2>
       </div>
       {children}
     </section>
@@ -37,7 +35,6 @@ export default function App() {
       about: {
         title: 'Über mich',
         email: 'E-Mail',
-        phone: 'Telefon',
         location: 'Standort',
         locationValue: 'Darmstadt, Deutschland',
         languages: 'Sprachkenntnisse',
@@ -137,7 +134,6 @@ export default function App() {
       about: {
         title: 'About Me',
         email: 'Email',
-        phone: 'Phone',
         location: 'Location',
         locationValue: 'Darmstadt, Germany',
         languages: 'Languages',
@@ -248,19 +244,12 @@ export default function App() {
     return () => navObserver.disconnect();
   }, []);
 
-  const tileBase = 'bg-surface/70 backdrop-blur-xl border border-white/10 rounded-[28px]';
+  const tile = 'bg-surface border border-border rounded-lg';
 
   return (
-    <div className="min-h-screen bg-bg text-text font-sans relative overflow-x-hidden">
-      {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div className="absolute -top-40 -left-32 w-[28rem] h-[28rem] rounded-full bg-accent/10 blur-[140px] animate-aurora-1" />
-        <div className="absolute top-1/3 -right-40 w-[24rem] h-[24rem] rounded-full bg-accent2/10 blur-[140px] animate-aurora-2" />
-        <div className="absolute bottom-0 left-1/4 w-[20rem] h-[20rem] rounded-full bg-accent/5 blur-[140px] animate-aurora-2" />
-      </div>
-
+    <div className="min-h-screen bg-bg text-text font-sans">
       {/* Header / Nav */}
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-bg/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur-sm">
         <nav className="container mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <a href="#hero" className="font-mono text-xs tracking-[0.2em] uppercase text-muted hover:text-accent transition-colors">
             Ali Shariati Najafabadi
@@ -276,7 +265,7 @@ export default function App() {
               >
                 {t.sections[key]}
                 <span
-                  className={`absolute left-0 right-0 -bottom-0.5 h-[2px] bg-accent-gradient rounded-full origin-left transition-transform duration-300 ${
+                  className={`absolute left-0 right-0 -bottom-0.5 h-[1.5px] bg-accent origin-left transition-transform duration-300 ${
                     activeSection === key ? 'scale-x-100' : 'scale-x-0'
                   }`}
                 />
@@ -285,7 +274,7 @@ export default function App() {
           </div>
           <button
             onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-            className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-white/10 rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors shrink-0"
+            className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-border rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors shrink-0"
           >
             <Globe size={14} />
             {language === 'de' ? 'EN' : 'DE'}
@@ -299,8 +288,8 @@ export default function App() {
               href={`#${key}`}
               className={`px-3 py-1.5 rounded-full whitespace-nowrap border transition-colors duration-200 ${
                 activeSection === key
-                  ? 'bg-accent-gradient text-bg font-semibold border-transparent'
-                  : 'text-muted border-white/10'
+                  ? 'bg-accent text-surface font-semibold border-accent'
+                  : 'text-muted border-border'
               }`}
             >
               {t.sections[key]}
@@ -309,64 +298,54 @@ export default function App() {
         </div>
       </header>
 
-      <main className="relative z-10">
-        <div className="container mx-auto px-6 max-w-6xl py-10 md:py-14 space-y-16 md:space-y-24">
+      <main>
+        <div className="container mx-auto px-6 max-w-5xl py-14 md:py-20 space-y-20 md:space-y-28">
 
           {/* Hero */}
           <section id="hero" className="scroll-mt-28">
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-surface/70 backdrop-blur-xl p-8 md:p-14">
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div className="absolute -top-24 -left-20 w-72 h-72 rounded-full bg-accent/30 blur-[100px] animate-aurora-1" />
-                <div className="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-accent2/20 blur-[100px] animate-aurora-2" />
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
+              <div className="w-28 h-28 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border border-border">
+                <img
+                  src="/IMG_5354.PNG"
+                  alt="Ali Shariati Najafabadi"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-3xl font-heading text-text bg-surface">AS</div>';
+                  }}
+                />
               </div>
-              <div className="relative flex flex-col md:flex-row items-start md:items-center gap-10">
-                <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-[28px] p-1 bg-accent-gradient animate-ring-pulse">
-                  <div className="w-full h-full rounded-[24px] overflow-hidden bg-surface">
-                    <img
-                      src="/IMG_5354.PNG"
-                      alt="Ali Shariati Najafabadi"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-4xl font-heading font-semibold text-text bg-surface">AS</div>';
-                      }}
-                    />
-                  </div>
-                </div>
 
-                <div className="flex-1">
-                  <h1
-                    className="font-heading text-5xl md:text-7xl font-semibold leading-[1.02] tracking-tight mb-5 bg-accent-shimmer bg-clip-text text-transparent animate-shimmer"
-                    style={{ backgroundSize: '200% auto' }}
-                  >
-                    {t.hero.title}
-                  </h1>
-                  <p className="text-lg md:text-xl text-muted leading-relaxed mb-5 max-w-xl">
-                    {t.hero.subtitle}
-                  </p>
-                  <p className="inline-block font-mono text-xs text-accent uppercase tracking-wide mb-8 border border-accent/40 bg-accent/10 rounded-full px-4 py-1.5">
-                    {t.hero.tagline}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                      <Mail size={16} />
-                      {t.hero.contact}
-                    </a>
-                    <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                      <Github size={16} />
-                      GitHub
-                    </a>
-                    <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
-                      <Linkedin size={16} />
-                      LinkedIn
-                    </a>
-                  </div>
+              <div className="flex-1">
+                <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-4">Portfolio</p>
+                <h1 className="font-heading text-6xl md:text-8xl leading-[0.95] text-text mb-6">
+                  {t.hero.title}
+                </h1>
+                <p className="text-lg md:text-xl text-muted leading-relaxed mb-3 max-w-xl">
+                  {t.hero.subtitle}
+                </p>
+                <p className="font-mono text-xs text-muted uppercase tracking-wide mb-8">
+                  {t.hero.tagline}
+                </p>
+                <div className="flex flex-wrap gap-6">
+                  <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text border-b border-text pb-0.5 hover:text-accent hover:border-accent transition-colors">
+                    <Mail size={15} />
+                    {t.hero.contact}
+                  </a>
+                  <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text border-b border-text pb-0.5 hover:text-accent hover:border-accent transition-colors">
+                    <Github size={15} />
+                    GitHub
+                  </a>
+                  <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text border-b border-text pb-0.5 hover:text-accent hover:border-accent transition-colors">
+                    <Linkedin size={15} />
+                    LinkedIn
+                  </a>
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-8">
-              <a href="#about" className="flex flex-col items-center gap-1 text-muted hover:text-accent transition-colors animate-bounce" aria-label="Scroll down">
-                <ArrowDown size={18} />
+            <div className="flex justify-center mt-14">
+              <a href="#about" className="text-muted hover:text-accent transition-colors animate-bounce" aria-label="Scroll down">
+                <ArrowDown size={16} />
               </a>
             </div>
           </section>
@@ -374,9 +353,9 @@ export default function App() {
           {/* About */}
           <Section id="about" index={sectionIndex.about} title={t.about.title}>
             <div className="grid md:grid-cols-3 gap-5">
-              <div className={`${tileBase} md:col-span-2 p-6 md:p-8 grid sm:grid-cols-3 gap-6`}>
+              <div className={`${tile} md:col-span-2 p-6 md:p-8 grid sm:grid-cols-2 gap-6`}>
                 <div className="flex items-start gap-3">
-                  <Mail className="mt-1 text-accent shrink-0" size={18} />
+                  <Mail className="mt-1 text-accent shrink-0" size={17} />
                   <div>
                     <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.email}</p>
                     <a href="mailto:alishariaty0854@gmail.com" className="hover:text-accent transition-colors break-all">
@@ -385,23 +364,14 @@ export default function App() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Phone className="mt-1 text-accent shrink-0" size={18} />
-                  <div>
-                    <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.phone}</p>
-                    <a href="tel:+4915754703516" className="hover:text-accent transition-colors">
-                      +49 157 54703516
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="mt-1 text-accent shrink-0" size={18} />
+                  <MapPin className="mt-1 text-accent shrink-0" size={17} />
                   <div>
                     <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.location}</p>
                     <p>{t.about.locationValue}</p>
                   </div>
                 </div>
               </div>
-              <div className={`${tileBase} p-6 md:p-8`}>
+              <div className={`${tile} p-6 md:p-8`}>
                 <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-5">{t.about.languages}</h3>
                 <div className="space-y-5">
                   {[
@@ -414,8 +384,8 @@ export default function App() {
                         <span className="font-medium">{lang.label}</span>
                         <span className="font-mono text-xs text-accent uppercase">{lang.level}</span>
                       </div>
-                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-accent-gradient rounded-full" style={{ width: lang.fill }}></div>
+                      <div className="h-1 bg-border rounded-full overflow-hidden">
+                        <div className="h-full bg-accent rounded-full" style={{ width: lang.fill }}></div>
                       </div>
                     </div>
                   ))}
@@ -430,13 +400,13 @@ export default function App() {
               {t.experience.positions.map((job, index) => (
                 <div
                   key={index}
-                  className={`${tileBase} p-6 md:p-8 hover:border-accent/50 transition-colors duration-300 ${
+                  className={`${tile} p-6 md:p-8 hover:border-accent transition-colors duration-300 ${
                     job.tasks.length > 0 ? 'md:col-span-2' : 'md:col-span-1'
                   }`}
                 >
                   <div className="flex flex-col gap-1 mb-3">
                     <h3 className="text-xl font-semibold text-text flex items-center gap-2">
-                      <Briefcase className="text-accent shrink-0" size={18} />
+                      <Briefcase className="text-accent shrink-0" size={17} />
                       {job.position}
                     </h3>
                     <p className="text-muted">{job.company}</p>
@@ -463,13 +433,13 @@ export default function App() {
               {t.education.positions.map((edu, index) => (
                 <div
                   key={index}
-                  className={`${tileBase} p-6 md:p-8 hover:border-accent/50 transition-colors duration-300 ${
+                  className={`${tile} p-6 md:p-8 hover:border-accent transition-colors duration-300 ${
                     edu.note ? 'md:col-span-2' : 'md:col-span-1'
                   }`}
                 >
                   <div className="flex flex-col gap-1 mb-3">
                     <h3 className="text-xl font-semibold text-text flex items-center gap-2">
-                      <GraduationCap className="text-accent shrink-0" size={18} />
+                      <GraduationCap className="text-accent shrink-0" size={17} />
                       {edu.degree}
                     </h3>
                     <p className="text-muted">{edu.university}</p>
@@ -490,11 +460,11 @@ export default function App() {
                 href="https://github.com/Ali-Shariati-Najafabadi/Real-Time-Deepfake-Pipeline"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${tileBase} md:col-span-2 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}
+                className={`${tile} md:col-span-2 p-6 md:p-8 hover:border-accent transition-colors duration-300 group`}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Code size={20} /></span>
-                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                  <Code className="text-accent" size={20} />
+                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={15} />
                 </div>
                 <h3 className="text-lg font-semibold text-text mb-1">
                   {t.projects.project1.title}
@@ -502,15 +472,15 @@ export default function App() {
                 <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project1.org}</p>
                 <p className="text-muted mb-4">{t.projects.project1.desc}</p>
                 <div className="flex flex-wrap gap-2 font-mono text-xs">
-                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">Computer Vision</span>
+                  <span className="border border-border rounded-full px-3 py-1">Python</span>
+                  <span className="border border-border rounded-full px-3 py-1">PyTorch</span>
+                  <span className="border border-border rounded-full px-3 py-1">Computer Vision</span>
                 </div>
               </a>
 
-              <div className={`${tileBase} md:col-span-1 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}>
+              <div className={`${tile} md:col-span-1 p-6 md:p-8 hover:border-accent transition-colors duration-300`}>
                 <div className="flex items-start justify-between mb-3">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><ShieldCheck size={20} /></span>
+                  <ShieldCheck className="text-accent" size={20} />
                 </div>
                 <h3 className="text-lg font-semibold text-text mb-1">
                   {t.projects.project2.title}
@@ -518,46 +488,44 @@ export default function App() {
                 <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project2.org}</p>
                 <p className="text-muted mb-4">{t.projects.project2.desc}</p>
                 <div className="flex flex-wrap gap-2 font-mono text-xs">
-                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">React</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">Security</span>
+                  <span className="border border-border rounded-full px-3 py-1">Python</span>
+                  <span className="border border-border rounded-full px-3 py-1">React</span>
+                  <span className="border border-border rounded-full px-3 py-1">Security</span>
                 </div>
               </div>
 
-              <div className={`${tileBase} md:col-span-1 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}>
-                <a
-                  href="https://github.com/Ali-Shariati-Najafabadi/Generate-Context-Aware-Captions-from-Photos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Brain size={20} /></span>
-                    <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text mb-1">
-                    {t.projects.project3.title}
-                  </h3>
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project3.org}</p>
-                  <p className="text-muted mb-4">{t.projects.project3.desc}</p>
-                  <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">NLP</span>
-                    <span className="border border-white/10 rounded-full px-3 py-1">BLIP-2</span>
-                  </div>
-                </a>
-              </div>
+              <a
+                href="https://github.com/Ali-Shariati-Najafabadi/Generate-Context-Aware-Captions-from-Photos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${tile} md:col-span-1 p-6 md:p-8 hover:border-accent transition-colors duration-300 group`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <Brain className="text-accent" size={20} />
+                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={15} />
+                </div>
+                <h3 className="text-lg font-semibold text-text mb-1">
+                  {t.projects.project3.title}
+                </h3>
+                <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project3.org}</p>
+                <p className="text-muted mb-4">{t.projects.project3.desc}</p>
+                <div className="flex flex-wrap gap-2 font-mono text-xs">
+                  <span className="border border-border rounded-full px-3 py-1">Python</span>
+                  <span className="border border-border rounded-full px-3 py-1">PyTorch</span>
+                  <span className="border border-border rounded-full px-3 py-1">NLP</span>
+                  <span className="border border-border rounded-full px-3 py-1">BLIP-2</span>
+                </div>
+              </a>
 
               <a
                 href="https://github.com/Ali-Shariati-Najafabadi/multimodal-deepfake-detection"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${tileBase} md:col-span-2 p-6 md:p-8 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group`}
+                className={`${tile} md:col-span-2 p-6 md:p-8 hover:border-accent transition-colors duration-300 group`}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Fingerprint size={20} /></span>
-                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                  <Fingerprint className="text-accent" size={20} />
+                  <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={15} />
                 </div>
                 <h3 className="text-lg font-semibold text-text mb-1">
                   {t.projects.project4.title}
@@ -565,10 +533,10 @@ export default function App() {
                 <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project4.org}</p>
                 <p className="text-muted mb-4">{t.projects.project4.desc}</p>
                 <div className="flex flex-wrap gap-2 font-mono text-xs">
-                  <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">HuBERT</span>
-                  <span className="border border-white/10 rounded-full px-3 py-1">Transformers</span>
+                  <span className="border border-border rounded-full px-3 py-1">Python</span>
+                  <span className="border border-border rounded-full px-3 py-1">PyTorch</span>
+                  <span className="border border-border rounded-full px-3 py-1">HuBERT</span>
+                  <span className="border border-border rounded-full px-3 py-1">Transformers</span>
                 </div>
               </a>
             </div>
@@ -577,40 +545,40 @@ export default function App() {
           {/* Skills */}
           <Section id="skills" index={sectionIndex.skills} title={t.skills.title}>
             <div className="grid md:grid-cols-3 gap-5">
-              <div className={`${tileBase} p-6 md:p-8`}>
+              <div className={`${tile} p-6 md:p-8`}>
                 <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                  <Code size={16} className="text-accent" />
+                  <Code size={15} className="text-accent" />
                   {t.skills.languages}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL', 'C++'].map(skill => (
-                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                    <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent transition-colors">
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className={`${tileBase} p-6 md:p-8`}>
+              <div className={`${tile} p-6 md:p-8`}>
                 <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                  <Award size={16} className="text-accent" />
+                  <Award size={15} className="text-accent" />
                   {t.skills.frameworks}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'TestComplete', 'ReadyAPI', 'Selenium', 'Git', 'Docker', 'Azure DevOps', 'PostgreSQL', 'MongoDB'].map(skill => (
-                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                    <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent transition-colors">
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className={`${tileBase} p-6 md:p-8`}>
+              <div className={`${tile} p-6 md:p-8`}>
                 <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
-                  <Brain size={16} className="text-accent" />
+                  <Brain size={15} className="text-accent" />
                   {t.skills.ml}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning', 'CNNs', 'Transformers'].map(skill => (
-                    <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                    <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent transition-colors">
                       {skill}
                     </span>
                   ))}
@@ -622,19 +590,19 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-8 relative z-10">
+      <footer className="border-t border-border py-8">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-mono text-xs text-muted">{t.footer.rights}</p>
-            <div className="flex gap-3">
-              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
-                <Github size={16} />
+            <div className="flex gap-5">
+              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent transition-colors">
+                <Github size={17} />
               </a>
-              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
-                <Linkedin size={16} />
+              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent transition-colors">
+                <Linkedin size={17} />
               </a>
-              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
-                <Mail size={16} />
+              <a href="mailto:alishariaty0854@gmail.com" className="text-muted hover:text-accent transition-colors">
+                <Mail size={17} />
               </a>
             </div>
           </div>
