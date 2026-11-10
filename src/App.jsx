@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, Mail, Phone, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin } from 'lucide-react';
+import { Github, Mail, Phone, MapPin, Code, Brain, Award, ExternalLink, Globe, Briefcase, Linkedin, ShieldCheck } from 'lucide-react';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('experience');
@@ -89,6 +89,11 @@ export default function App() {
           title: 'Context-Aware Captions from Photos',
           org: 'System Security Lab, TU Darmstadt',
           desc: 'Training eines BLIP-2-Modells auf GoodNews-Datensatz (15k Bilder) zur kontextbewussten Bildbeschreibung - erreichte 23% Verbesserung gegenüber Baseline bei BLEU-Score'
+        },
+        project4: {
+          title: 'Detection of Multi-Modal Deepfakes',
+          org: 'Bachelor-Thesis · Fraunhofer SIT & TU Darmstadt',
+          desc: 'Systematischer Vergleich von ResNet-50/BiLSTM, X3D-M und TimeSformer als Video-Encoder in Fusion mit HuBERT-Audio zur Erkennung und Modalitätszuordnung von Audio-Video-Deepfakes (vier Klassen: Real, FARV, RAFV, FAFV). Cross-Dataset-Evaluation auf AV-Deepfake1M++, FakeAVCeleb und DeepSpeak v2.0.'
         }
       },
       skills: {
@@ -184,6 +189,11 @@ export default function App() {
           title: 'Context-Aware Captions from Photos',
           org: 'System Security Lab, TU Darmstadt',
           desc: 'Training of a BLIP-2 model on GoodNews dataset (15k images) for context-aware image captioning - achieved 23% improvement over baseline in BLEU score'
+        },
+        project4: {
+          title: 'Detection of Multi-Modal Deepfakes',
+          org: 'Bachelor Thesis · Fraunhofer SIT & TU Darmstadt',
+          desc: 'Systematic comparison of ResNet-50/BiLSTM, X3D-M and TimeSformer video encoders fused with HuBERT audio for multi-modal deepfake detection and modality attribution (four classes: Real, FARV, RAFV, FAFV). Cross-dataset evaluation on AV-Deepfake1M++, FakeAVCeleb and DeepSpeak v2.0.'
         }
       },
       skills: {
@@ -212,27 +222,28 @@ export default function App() {
     <div className="min-h-screen bg-bg text-text flex flex-col font-sans relative overflow-x-hidden">
       {/* Decorative glow background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div className="absolute -top-40 -left-32 w-[28rem] h-[28rem] rounded-full bg-accent/20 blur-[120px]" />
-        <div className="absolute top-1/3 -right-40 w-[24rem] h-[24rem] rounded-full bg-accent2/10 blur-[120px]" />
+        <div className="absolute -top-40 -left-32 w-[28rem] h-[28rem] rounded-full bg-accent/20 blur-[120px] animate-aurora-1" />
+        <div className="absolute top-1/3 -right-40 w-[24rem] h-[24rem] rounded-full bg-accent2/10 blur-[120px] animate-aurora-2" />
+        <div className="absolute bottom-0 left-1/3 w-[20rem] h-[20rem] rounded-full bg-accent/10 blur-[120px] animate-aurora-2" />
       </div>
 
       {/* Header / Nav */}
-      <header className="sticky top-0 z-20 border-b border-border bg-bg/80 backdrop-blur-md">
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-bg/70 backdrop-blur-xl">
         <nav className="container mx-auto px-6 py-5">
           <div className="flex flex-wrap justify-between items-center gap-4">
             <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted">
               Ali Shariati Najafabadi
             </span>
             <div className="flex items-center gap-4">
-              <div className="hidden md:flex gap-2 font-mono text-xs uppercase tracking-wider bg-surface border border-border rounded-full p-1">
+              <div className="hidden md:flex gap-2 font-mono text-xs uppercase tracking-wider bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full p-1">
                 {sectionKeys.map((key) => (
                   <button
                     key={key}
                     onClick={() => setActiveSection(key)}
-                    className={`px-4 py-1.5 rounded-full transition-all duration-200 ${
+                    className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
                       activeSection === key
                         ? 'bg-accent-gradient text-bg font-semibold shadow-glow'
-                        : 'text-muted hover:text-text'
+                        : 'text-muted hover:text-text hover:bg-white/5'
                     }`}
                   >
                     {t.sections[key]}
@@ -241,7 +252,7 @@ export default function App() {
               </div>
               <button
                 onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-                className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-border rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors"
+                className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted border border-white/10 rounded-full px-3 py-1.5 hover:text-accent hover:border-accent transition-colors"
               >
                 <Globe size={14} />
                 {language === 'de' ? 'EN' : 'DE'}
@@ -257,7 +268,7 @@ export default function App() {
                 className={`px-4 py-1.5 rounded-full whitespace-nowrap border transition-colors duration-200 ${
                   activeSection === key
                     ? 'bg-accent-gradient text-bg font-semibold border-transparent'
-                    : 'text-muted border-border'
+                    : 'text-muted border-white/10'
                 }`}
               >
                 {t.sections[key]}
@@ -270,7 +281,7 @@ export default function App() {
       {/* Hero */}
       <section className="container mx-auto px-6 py-16 md:py-24 relative z-10">
         <div className="flex flex-col md:flex-row items-start gap-12 max-w-5xl mx-auto">
-          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 rounded-3xl p-1 bg-accent-gradient shadow-glow">
+          <div className="w-40 h-40 md:w-48 md:h-48 shrink-0 rounded-3xl p-1 bg-accent-gradient animate-ring-pulse">
             <div className="w-full h-full rounded-[20px] overflow-hidden bg-surface">
               <img
                 src="/IMG_5354.PNG"
@@ -295,15 +306,15 @@ export default function App() {
               {t.hero.tagline}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text bg-surface border border-border rounded-full px-4 py-2 hover:border-accent hover:text-accent transition-colors">
+              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
                 <Mail size={16} />
                 {t.hero.contact}
               </a>
-              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface border border-border rounded-full px-4 py-2 hover:border-accent hover:text-accent transition-colors">
+              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
                 <Github size={16} />
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface border border-border rounded-full px-4 py-2 hover:border-accent hover:text-accent transition-colors">
+              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text bg-surface/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-accent hover:text-accent hover:-translate-y-0.5 transition-all">
                 <Linkedin size={16} />
                 LinkedIn
               </a>
@@ -323,8 +334,8 @@ export default function App() {
                 <h2 className="font-heading text-3xl font-semibold text-text">{t.about.title}</h2>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-surface border border-border rounded-2xl p-6 space-y-5">
-                  <div className="flex items-start gap-3 pb-4 border-b border-border">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-5">
+                  <div className="flex items-start gap-3 pb-4 border-b border-white/10">
                     <Mail className="mt-1 text-accent" size={18} />
                     <div>
                       <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.email}</p>
@@ -333,7 +344,7 @@ export default function App() {
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 pb-4 border-b border-border">
+                  <div className="flex items-start gap-3 pb-4 border-b border-white/10">
                     <Phone className="mt-1 text-accent" size={18} />
                     <div>
                       <p className="font-mono text-xs uppercase tracking-wider text-muted mb-1">{t.about.phone}</p>
@@ -350,7 +361,7 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-surface border border-border rounded-2xl p-6">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-5">{t.about.languages}</h3>
                   <div className="space-y-5">
                     {[
@@ -363,7 +374,7 @@ export default function App() {
                           <span className="font-medium">{lang.label}</span>
                           <span className="font-mono text-xs text-accent uppercase">{lang.level}</span>
                         </div>
-                        <div className="h-1.5 bg-border rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                           <div className="h-full bg-accent-gradient rounded-full" style={{ width: lang.fill }}></div>
                         </div>
                       </div>
@@ -383,7 +394,7 @@ export default function App() {
               </div>
               <div className="space-y-6">
                 {t.experience.positions.map((job, index) => (
-                  <div key={index} className="bg-surface border border-border rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
+                  <div key={index} className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-3 gap-1">
                       <div>
                         <h3 className="text-xl font-semibold text-text flex items-center gap-2">
@@ -419,7 +430,7 @@ export default function App() {
               </div>
               <div className="space-y-6">
                 {t.education.positions.map((edu, index) => (
-                  <div key={index} className="bg-surface border border-border rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
+                  <div key={index} className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 transition-colors duration-300">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-3 gap-1">
                       <div>
                         <h3 className="text-xl font-semibold text-text flex items-center gap-2">
@@ -451,7 +462,7 @@ export default function App() {
                   href="https://github.com/Ali-Shariati-Najafabadi/Real-Time-Deepfake-Pipeline"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-surface border border-border rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow transition-all duration-300 group"
+                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Code size={20} /></span>
@@ -463,13 +474,13 @@ export default function App() {
                   <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project1.org}</p>
                   <p className="text-muted mb-4">{t.projects.project1.desc}</p>
                   <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-border rounded-full px-3 py-1">Python</span>
-                    <span className="border border-border rounded-full px-3 py-1">PyTorch</span>
-                    <span className="border border-border rounded-full px-3 py-1">Computer Vision</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Computer Vision</span>
                   </div>
                 </a>
 
-                <div className="bg-surface border border-border rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow transition-all duration-300 group">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group">
                   <div className="flex items-start justify-between mb-3">
                     <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Award size={20} /></span>
                   </div>
@@ -479,9 +490,9 @@ export default function App() {
                   <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project2.org}</p>
                   <p className="text-muted mb-4">{t.projects.project2.desc}</p>
                   <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-border rounded-full px-3 py-1">Python</span>
-                    <span className="border border-border rounded-full px-3 py-1">React</span>
-                    <span className="border border-border rounded-full px-3 py-1">Security</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">React</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Security</span>
                   </div>
                 </div>
 
@@ -489,7 +500,7 @@ export default function App() {
                   href="https://github.com/Ali-Shariati-Najafabadi/Generate-Context-Aware-Captions-from-Photos"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-surface border border-border rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow transition-all duration-300 group md:col-span-2"
+                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><Brain size={20} /></span>
@@ -501,10 +512,33 @@ export default function App() {
                   <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project3.org}</p>
                   <p className="text-muted mb-4">{t.projects.project3.desc}</p>
                   <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="border border-border rounded-full px-3 py-1">Python</span>
-                    <span className="border border-border rounded-full px-3 py-1">PyTorch</span>
-                    <span className="border border-border rounded-full px-3 py-1">NLP</span>
-                    <span className="border border-border rounded-full px-3 py-1">BLIP-2</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">NLP</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">BLIP-2</span>
+                  </div>
+                </a>
+
+                <a
+                  href="https://github.com/Ali-Shariati-Najafabadi/multimodal-deepfake-detection"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-accent/50 hover:shadow-glow hover:-translate-y-1 transition-all duration-300 group"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-accent/10 text-accent"><ShieldCheck size={20} /></span>
+                    <ExternalLink className="text-muted group-hover:text-accent transition-colors" size={16} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-text mb-1">
+                    {t.projects.project4.title}
+                  </h3>
+                  <p className="font-mono text-xs uppercase tracking-wider text-muted mb-3">{t.projects.project4.org}</p>
+                  <p className="text-muted mb-4">{t.projects.project4.desc}</p>
+                  <div className="flex flex-wrap gap-2 font-mono text-xs">
+                    <span className="border border-white/10 rounded-full px-3 py-1">Python</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">PyTorch</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">HuBERT</span>
+                    <span className="border border-white/10 rounded-full px-3 py-1">Transformers</span>
                   </div>
                 </a>
               </div>
@@ -519,40 +553,40 @@ export default function App() {
                 <h2 className="font-heading text-3xl font-semibold text-text">{t.skills.title}</h2>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-surface border border-border rounded-2xl p-6">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
                     <Code size={16} className="text-accent" />
                     {t.skills.languages}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {['Python', 'Java', 'JavaScript', 'TypeScript', 'SQL', 'C++'].map(skill => (
-                      <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="bg-surface border border-border rounded-2xl p-6">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
                     <Award size={16} className="text-accent" />
                     {t.skills.frameworks}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {['React', 'Node.js', 'Vue.js', 'Flask', 'FastAPI', 'TestComplete', 'ReadyAPI', 'Selenium', 'Git', 'Docker', 'Azure DevOps', 'PostgreSQL', 'MongoDB'].map(skill => (
-                      <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="bg-surface border border-border rounded-2xl p-6">
+                <div className="bg-surface/70 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="font-mono text-xs uppercase tracking-wider text-muted mb-4 flex items-center gap-2">
                     <Brain size={16} className="text-accent" />
                     {t.skills.ml}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {['PyTorch', 'TensorFlow', 'Scikit-learn', 'OpenCV', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning', 'CNNs', 'Transformers'].map(skill => (
-                      <span key={skill} className="border border-border rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
+                      <span key={skill} className="border border-white/10 rounded-full px-3 py-1.5 text-sm hover:border-accent hover:text-accent hover:bg-accent/10 transition-colors">
                         {skill}
                       </span>
                     ))}
@@ -565,18 +599,18 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 relative z-10">
+      <footer className="border-t border-white/10 py-8 relative z-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-mono text-xs text-muted">{t.footer.rights}</p>
             <div className="flex gap-3">
-              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-colors">
+              <a href="https://github.com/Ali-Shariati-Najafabadi" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
                 <Github size={16} />
               </a>
-              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-colors">
+              <a href="https://www.linkedin.com/in/ali-shariati-najafabadi-b69063220/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
                 <Linkedin size={16} />
               </a>
-              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-colors">
+              <a href="mailto:alishariaty0854@gmail.com" className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/70 backdrop-blur-xl border border-white/10 text-muted hover:border-accent hover:text-accent transition-colors">
                 <Mail size={16} />
               </a>
             </div>
